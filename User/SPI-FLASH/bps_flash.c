@@ -116,7 +116,7 @@ void Flash_WriteEnable(void)
 void Sector_erase(uint32_t addr)
 {
 	Flash_WriteEnable();//擦除扇区之前要执行写启用指令,位置必须在CS为0之前
-	WaitnoBUSY();
+	
 	CS(0);
 	SPI_SendRead_byte(Sector_Erase);
 	SPI_SendRead_byte((addr>>16)&0xff);
@@ -175,6 +175,14 @@ void FLASH_WriteData(uint32_t addr,uint8_t *a,uint32_t numreadbyte)
 	WaitnoBUSY();
 }
 
+//唤醒flash 避免进入低功耗模式
+void Flash_WAKEUP(void)
+{
+	CS(0);
+	SPI_SendRead_byte(Release_Power_down_or_HPM_Device_ID);
+	CS(1);
+}
+
 
 /**
   * @brief  对FLASH写入数据，调用本函数写入数据前需要先擦除扇区
@@ -215,7 +223,7 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
         pBuffer += SPI_FLASH_PageSize;
       }
 			/*若有多余的不满一页的数据，把它写完*/
-      FLASH_WriteData(WriteAddr,pBuffer,NumOfSingle);
+      FLASH_WriteData(WriteAddr,pBuffer, NumOfSingle);
     }
   }
 	/* 若地址与 SPI_FLASH_PageSize 不对齐  */
@@ -269,3 +277,5 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
     }
   }
 }
+
+
