@@ -3,65 +3,65 @@
 static void SPI_GPIO_Config()
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
-	//Ê¹ÄÜGPIOA
+	//ä½¿èƒ½GPIOA
 	RCC_APB2PeriphClockCmd(FLASH_SPI_GPIOA_CLK,ENABLE);
-	//Ê¹ÄÜGPIOC
+	//ä½¿èƒ½GPIOC
 	RCC_APB2PeriphClockCmd(FLASH_SPI_GPIOC_CLK,ENABLE);
-	//Ê¹ÄÜSPI1
+	//ä½¿èƒ½SPI1
 	RCC_APB2PeriphClockCmd(FLASH_SPI_CLK,ENABLE);
-	//ÅäÖÃSCKÒı½Å
+	//é…ç½®SCKå¼•è„š
 	GPIO_InitStruct.GPIO_Pin=FLASH_SPI_SCK;
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_AF_PP;
 	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
 	GPIO_Init(FLASH_SPI_SCK_GPIO_PORT, &GPIO_InitStruct);
-	//ÅäÖÃMOSIÒı½Å
+	//é…ç½®MOSIå¼•è„š
 	GPIO_InitStruct.GPIO_Pin=FLASH_SPI_MOSI;
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_AF_PP;
 	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
 	GPIO_Init(FLASH_SPI_MOSI_GPIO_PORT, &GPIO_InitStruct);
-	//ÅäÖÃMISOÒı½Å
+	//é…ç½®MISOå¼•è„š
 	GPIO_InitStruct.GPIO_Pin=FLASH_SPI_MISO;
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_IN_FLOATING;
 	GPIO_Init(FLASH_SPI_MISO_GPIO_PORT, &GPIO_InitStruct);
 	
-	//ÅäÖÃCSÒı½Å£¨Èí¼şÄ£Äâ£©
+	//é…ç½®CSå¼•è„šï¼ˆè½¯ä»¶æ¨¡æ‹Ÿï¼‰
 	GPIO_InitStruct.GPIO_Pin=FLASH_SPI_CS;
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
 	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
 	GPIO_Init(FLASH_SPI_CS_GPIO_PORT, &GPIO_InitStruct);
-	//ÈÃcs´¦ÓÚ¿ÕÏĞ×´Ì¬
+	//è®©cså¤„äºç©ºé—²çŠ¶æ€
 	CS(1)
 }
 
 static void SPI_Config()
 {
 	SPI_InitTypeDef SPI_InitStruct;
-	SPI_InitStruct.SPI_Direction=SPI_Direction_2Lines_FullDuplex;//Ë«ÏßÈ«Ë«¹¤
-	SPI_InitStruct.SPI_Mode=SPI_Mode_Master;//Ö÷»úÄ£Ê½
-	SPI_InitStruct.SPI_DataSize=SPI_DataSize_8b;//Ò»¸öÊı¾İÖ¡Îª8Î»
-	SPI_InitStruct.SPI_CPOL=SPI_CPOL_Low;//CPOL£ºÊ±ÖÓ¼«ĞÔ (Clock polarity) 0£º ¿ÕÏĞ×´Ì¬Ê±£¬SCK±£³ÖµÍµçÆ½£»1£º ¿ÕÏĞ×´Ì¬Ê±£¬SCK±£³Ö¸ßµçÆ½¡£
-	SPI_InitStruct.SPI_CPHA=SPI_CPHA_1Edge;//CPHA£ºÊ±ÖÓÏàÎ» µÚÒ»¸öÊ±ÖÓ±ßÑØ¿ªÊ¼²ÉÑù
-	SPI_InitStruct.SPI_NSS=SPI_NSS_Soft;//Èí¼şÄ£Ê½
-	SPI_InitStruct.SPI_BaudRatePrescaler=SPI_BaudRatePrescaler_2;//·ÖÆµ
-	SPI_InitStruct.SPI_FirstBit=SPI_FirstBit_MSB;//¸ßÎ»ÏÈĞĞ
-	SPI_InitStruct.SPI_CRCPolynomial=0;//²»²ÉÓÃCRCĞ£Ñé
+	SPI_InitStruct.SPI_Direction=SPI_Direction_2Lines_FullDuplex;//åŒçº¿å…¨åŒå·¥
+	SPI_InitStruct.SPI_Mode=SPI_Mode_Master;//ä¸»æœºæ¨¡å¼
+	SPI_InitStruct.SPI_DataSize=SPI_DataSize_8b;//ä¸€ä¸ªæ•°æ®å¸§ä¸º8ä½
+	SPI_InitStruct.SPI_CPOL=SPI_CPOL_Low;//CPOLï¼šæ—¶é’Ÿææ€§ (Clock polarity) 0ï¼š ç©ºé—²çŠ¶æ€æ—¶ï¼ŒSCKä¿æŒä½ç”µå¹³ï¼›1ï¼š ç©ºé—²çŠ¶æ€æ—¶ï¼ŒSCKä¿æŒé«˜ç”µå¹³ã€‚
+	SPI_InitStruct.SPI_CPHA=SPI_CPHA_1Edge;//CPHAï¼šæ—¶é’Ÿç›¸ä½ ç¬¬ä¸€ä¸ªæ—¶é’Ÿè¾¹æ²¿å¼€å§‹é‡‡æ ·
+	SPI_InitStruct.SPI_NSS=SPI_NSS_Soft;//è½¯ä»¶æ¨¡å¼
+	SPI_InitStruct.SPI_BaudRatePrescaler=SPI_BaudRatePrescaler_2;//åˆ†é¢‘
+	SPI_InitStruct.SPI_FirstBit=SPI_FirstBit_MSB;//é«˜ä½å…ˆè¡Œ
+	SPI_InitStruct.SPI_CRCPolynomial=0;//ä¸é‡‡ç”¨CRCæ ¡éªŒ
 	
 	SPI_Init(SPI1, &SPI_InitStruct);
 	
 	SPI_Cmd(SPI1,ENABLE);
 }
 
-void SPI_FLASH_Init(void)//³õÊ¼»¯Òı½ÅºÍSPI
+void SPI_FLASH_Init(void)//åˆå§‹åŒ–å¼•è„šå’ŒSPI
 {
 	SPI_GPIO_Config();
 	SPI_Config();
 }
-//STM32Í¨¹ıSPI¶Á»òÕßĞ´ÈëflashÖĞ
+//STM32é€šè¿‡SPIè¯»æˆ–è€…å†™å…¥flashä¸­
 uint8_t SPI_SendRead_byte(uint8_t Data)
 {
 	uint32_t n=SPITIMEout;
-	//ÅĞ¶Ï·¢ËÍ±êÖ¾Î»ÊÇ·ñÎª1£¨Îª1Ê±·¢ËÍ»º´æÆ÷Îª¿Õ¿ÉÒÔÍùÀïÃæĞ´Êı¾İ£¬Îª0Ôò·Ç¿Õ£¬¸Ã¼Ä´æÆ÷ÔÚstm32ÖĞ£©
-	while (SPI_I2S_GetFlagStatus(FLASH_SPIx, SPI_I2S_FLAG_TXE)==0)//Í£ÁôÌ«¾ÃÈÔÈ»Ã»ÓĞÖÃÒ»ÔòÌø³ö·ÀÖ¹³ÌĞò¿¨ËÀ
+	//åˆ¤æ–­å‘é€æ ‡å¿—ä½æ˜¯å¦ä¸º1ï¼ˆä¸º1æ—¶å‘é€ç¼“å­˜å™¨ä¸ºç©ºå¯ä»¥å¾€é‡Œé¢å†™æ•°æ®ï¼Œä¸º0åˆ™éç©ºï¼Œè¯¥å¯„å­˜å™¨åœ¨stm32ä¸­ï¼‰
+	while (SPI_I2S_GetFlagStatus(FLASH_SPIx, SPI_I2S_FLAG_TXE)==0)//åœç•™å¤ªä¹…ä»ç„¶æ²¡æœ‰ç½®ä¸€åˆ™è·³å‡ºé˜²æ­¢ç¨‹åºå¡æ­»
 	{
 		n--;
 		if(n==0) 
@@ -69,7 +69,7 @@ uint8_t SPI_SendRead_byte(uint8_t Data)
 	}
 	SPI_I2S_SendData(FLASH_SPIx, Data);
 	n=SPITIMEout;
-//ÓÉÓÚ½ÓÊÕÒ»Î»ºÍ·¢ËÍÒ»Î»Í¬Ê±½øĞĞµ±½ÓÊÕ±êÖ¾Î»ÖÃ1Ê±Ò²´ú±í·¢ËÍÍêÒ»¸ö×Ö½ÚºÍ½ÓÊÕÍêÒ»¸ö×Ö½Ú
+//ç”±äºæ¥æ”¶ä¸€ä½å’Œå‘é€ä¸€ä½åŒæ—¶è¿›è¡Œå½“æ¥æ”¶æ ‡å¿—ä½ç½®1æ—¶ä¹Ÿä»£è¡¨å‘é€å®Œä¸€ä¸ªå­—èŠ‚å’Œæ¥æ”¶å®Œä¸€ä¸ªå­—èŠ‚
 	while(SPI_I2S_GetFlagStatus(FLASH_SPIx, SPI_I2S_FLAG_RXNE)==0);
 	{
 		n--;
@@ -79,20 +79,20 @@ uint8_t SPI_SendRead_byte(uint8_t Data)
 	return SPI_I2S_ReceiveData(FLASH_SPIx);
 }
 
-//Í¨¹ıSPI¶Á»áÊı¾İ
+//é€šè¿‡SPIè¯»ä¼šæ•°æ®
 uint8_t SPI_Readbyte()
 {
 	return SPI_SendRead_byte(DUMMY);
 }
 
 
-//¶ÁÈ¡flashµÄidºÅ
+//è¯»å–flashçš„idå·
 uint32_t SPI_ReadID(void)
 {
 	uint32_t flash_ID=0;
-	CS(0);//csÎª0Ïàµ±ÓÚÊ¹ÄÜ
-	SPI_SendRead_byte(Read_ID);//·¢ËÍÃüÁî¸øflashÒª¶ÁÈ¡ËüµÄid(24Î»)
-	//¶ÁÈ¡ÓëĞ´ÈëÊÇÍ¬²½½øĞĞ£¬½øĞĞ¶ÁÈ¡Ê±¿ÉËæ±ãĞ´Èë·½±ã²úÉúÊ±ÖÓĞÅºÅÓÃÀ´¶ÁÈ¡
+	CS(0);//csä¸º0ç›¸å½“äºä½¿èƒ½
+	SPI_SendRead_byte(Read_ID);//å‘é€å‘½ä»¤ç»™flashè¦è¯»å–å®ƒçš„id(24ä½)
+	//è¯»å–ä¸å†™å…¥æ˜¯åŒæ­¥è¿›è¡Œï¼Œè¿›è¡Œè¯»å–æ—¶å¯éšä¾¿å†™å…¥æ–¹ä¾¿äº§ç”Ÿæ—¶é’Ÿä¿¡å·ç”¨æ¥è¯»å–
 	flash_ID|=SPI_SendRead_byte(DUMMY);
 	flash_ID<<=8;
 	
@@ -112,10 +112,11 @@ void Flash_WriteEnable(void)
 	CS(1);
 }
 
-//²Á³ıËùÑ¡ÉÈÇø£¨´óĞ¡Îª4kb£©
+//æ“¦é™¤æ‰€é€‰æ‰‡åŒºï¼ˆå¤§å°ä¸º4kbï¼‰
 void Sector_erase(uint32_t addr)
 {
-	Flash_WriteEnable();//²Á³ıÉÈÇøÖ®Ç°ÒªÖ´ĞĞĞ´ÆôÓÃÖ¸Áî,Î»ÖÃ±ØĞëÔÚCSÎª0Ö®Ç°
+	Flash_WriteEnable();//æ“¦é™¤æ‰‡åŒºä¹‹å‰è¦æ‰§è¡Œå†™å¯ç”¨æŒ‡ä»¤,ä½ç½®å¿…é¡»åœ¨CSä¸º0ä¹‹å‰
+	WaitnoBUSY();
 	CS(0);
 	SPI_SendRead_byte(Sector_Erase);
 	SPI_SendRead_byte((addr>>16)&0xff);
@@ -124,7 +125,7 @@ void Sector_erase(uint32_t addr)
 	CS(1);
 }
 
-void WaitnoBUSY(void)//µÈ´ıbusyÎª0
+void WaitnoBUSY(void)//ç­‰å¾…busyä¸º0
 {
 	
 	uint8_t state=0;
@@ -139,11 +140,11 @@ void WaitnoBUSY(void)//µÈ´ıbusyÎª0
 }
 
 
-//¶ÁÈ¡flashµÄÄ³¸öµØÖ·µÄÄÚÈİ,¶ÁÈ¡µ½µÄÄÚÈİ´æ´¢µ½aµØÖ·£¬¶ÁÈ¡numreadbyte¸ö×Ö½Ú
+//è¯»å–flashçš„æŸä¸ªåœ°å€çš„å†…å®¹,è¯»å–åˆ°çš„å†…å®¹å­˜å‚¨åˆ°aåœ°å€ï¼Œè¯»å–numreadbyteä¸ªå­—èŠ‚
 void FLASH_ReadData(uint32_t addr,uint8_t *a,uint32_t numreadbyte)
 {
-	CS(0);//csÎª0Ïàµ±ÓÚÊ¹ÄÜ
-	SPI_SendRead_byte(Read_Data);//·¢ËÍÃüÁî¸øflashÒª¶ÁÈ¡ËüaddrµØÖ·ÄÚÈİ
+	CS(0);//csä¸º0ç›¸å½“äºä½¿èƒ½
+	SPI_SendRead_byte(Read_Data);//å‘é€å‘½ä»¤ç»™flashè¦è¯»å–å®ƒaddråœ°å€å†…å®¹
 	SPI_SendRead_byte((addr>>16)&0xff);
 	SPI_SendRead_byte((addr>>8)&0xff);
 	SPI_SendRead_byte((addr>>0)&0xff);
@@ -155,12 +156,12 @@ void FLASH_ReadData(uint32_t addr,uint8_t *a,uint32_t numreadbyte)
 	CS(1);
 }
 
-//ÍùflashĞ´ÈëÊı¾İ£¨×î¶àÁ¬ĞøĞ´256×Ö½Ú£©
+//å¾€flashå†™å…¥æ•°æ®ï¼ˆæœ€å¤šè¿ç»­å†™256å­—èŠ‚ï¼‰
 void FLASH_WriteData(uint32_t addr,uint8_t *a,uint32_t numreadbyte)
 {
-	Flash_WriteEnable();//Ğ´Ê¹ÄÜ
-	CS(0);//csÎª0Ïàµ±ÓÚÊ¹ÄÜ
-	SPI_SendRead_byte(Page_Program);//·¢ËÍÃüÁî¸øflashÒª¶ÁÈ¡ËüaddrµØÖ·ÄÚÈİ
+	Flash_WriteEnable();//å†™ä½¿èƒ½
+	CS(0);//csä¸º0ç›¸å½“äºä½¿èƒ½
+	SPI_SendRead_byte(Page_Program);//å‘é€å‘½ä»¤ç»™flashè¦è¯»å–å®ƒaddråœ°å€å†…å®¹
 	SPI_SendRead_byte((addr>>16)&0xff);
 	SPI_SendRead_byte((addr>>8)&0xff);
 	SPI_SendRead_byte((addr>>0)&0xff);
